@@ -6,28 +6,25 @@ using System.Threading.Tasks;
 
 namespace RestaurantApp_Team
 {
-    //เอาไว้ใน Namespace
     class Restaurant
     {
         public string Name { get; set; }
         public string Type { get; set; }
         public double Rating { get; set; }
+        public Restaurant(string name, string type, double rating)
+        {
+            Name = name;
+            Type = type;
+            Rating = rating;
+        }
     }
 
     internal class Program
     {
-        static List<Restaurant> restaurants = new List<Restaurant>
-    {
-        new Restaurant { Name = "KFC", Type = "Fast Food", Rating = 4.7 },
-        new Restaurant { Name = "MK", Type = "Suki", Rating = 4.7 },
-        new Restaurant { Name = "Teenoi", Type = "Suki", Rating = 4.8 },
-        new Restaurant { Name = "MCDonald", Type = "Fast Food", Rating = 4.3 },
-        new Restaurant { Name = "Amazon", Type = "Cafe", Rating = 4.9 },
-        new Restaurant { Name = "Starbucks", Type = "Cafe", Rating = 4.6 }
-    };
-
         static void Main(string[] args)
         {
+
+
             while (true)
             {
                 Console.WriteLine("\n===== Restaurant Menu =====");
@@ -62,7 +59,22 @@ namespace RestaurantApp_Team
         // คน A รับผิดชอบ
         static void AddRestaurant()
         {
-            Console.WriteLine("Not completed");
+            List<Restaurant> restaurantList = new List<Restaurant>();
+
+            Console.Write("กรอกชื่อร้าน: ");
+            string name = Console.ReadLine();
+
+            Console.Write("กรอกประเภทอาหาร: ");
+            string type = Console.ReadLine();
+
+            Console.Write("กรอกคะแนน (เช่น 4.5): ");
+            
+            double rating = Convert.ToDouble(Console.ReadLine());
+
+            restaurantList.Add(new Restaurant(name, type, rating));
+
+            Console.WriteLine("\nเพิ่มร้านเรียบร้อยแล้ว!");
+            
         }
 
         // คน B รับผิดชอบ
