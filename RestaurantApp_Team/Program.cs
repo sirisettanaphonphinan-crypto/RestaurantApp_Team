@@ -81,13 +81,38 @@ namespace RestaurantApp_Team
         // คน B รับผิดชอบ
         static void ShowGoodRating()
         {
-            Console.WriteLine("Not completed");
+            Console.WriteLine("\n===== Good Rating Restaurants =====");
+
+            var goodRestaurants = restaurants
+                .Where(r => r.Rating >= 4.5)
+                .ToList();
+
+            if (goodRestaurants.Count == 0)
+            {
+                Console.WriteLine("ไม่พบร้านที่มีคะแนนตั้งแต่ 4.5 ขึ้นไป");
+                return;
+            }
+
+            foreach (var r in goodRestaurants)
+            {
+                Console.WriteLine($"ชื่อร้าน: {r.Name}");
+                Console.WriteLine($"ประเภทอาหาร: {r.Type}");
+                Console.WriteLine($"คะแนน: {r.Rating}");
+                Console.WriteLine("--------------------");
+            }
         }
 
         // คน C รับผิดชอบ
         static void ShowSummary()
         {
-            Console.WriteLine("Not completed");
+            var sortedList = restaurants.OrderByDescending(x => x.Rating).ToList();
+            Console.WriteLine("=== รายชื่อร้านอาหารทั้งหมด (เรียงตามคะแนนสูงสุด-ต่ำสุด) ===");
+            int a = 1;
+            foreach(Restaurant item in restaurants)
+            {
+                Console.WriteLine($"{a}. ชื่อร้านที่มีคะแนนสูงสุด: {item.Name} Rate: {item.Rating} \n ชื่อร้านที่มีคะแนนต่ำสุด: {item.Name} Rate: {item.Rating}");
+                a++;
+            }
         }
     }
 
