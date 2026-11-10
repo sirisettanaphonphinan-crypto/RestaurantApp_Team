@@ -6,7 +6,6 @@ using System.Threading.Tasks;
 
 namespace RestaurantApp_Team
 {
-    //เอาไว้ใน Namespace
     class Restaurant
     {
         public string Name { get; set; }
@@ -26,6 +25,8 @@ namespace RestaurantApp_Team
 
         static void Main(string[] args)
         {
+
+
             while (true)
             {
                 Console.WriteLine("\n===== Restaurant Menu =====");
@@ -60,6 +61,7 @@ namespace RestaurantApp_Team
         // คน A รับผิดชอบ
         static void AddRestaurant()
         {
+
 
             Console.Write("กรอกชื่อร้าน: ");
             string name = Console.ReadLine();
@@ -104,6 +106,7 @@ namespace RestaurantApp_Team
         // คน C รับผิดชอบ
         static void ShowSummary()
         {
+
             if (restaurants.Count == 0)
             {
                 Console.WriteLine("ยังไม่มีข้อมูลร้านอาหาร");
@@ -138,6 +141,9 @@ namespace RestaurantApp_Team
                     Console.WriteLine($"ร้านที่มีคะแนนต่ำสุด: {r.Name} Rate: {r.Rating}");
                 }
             }
+
+           
+
         }
     }
 
