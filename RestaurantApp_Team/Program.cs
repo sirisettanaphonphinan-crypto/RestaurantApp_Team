@@ -6,7 +6,6 @@ using System.Threading.Tasks;
 
 namespace RestaurantApp_Team
 {
-    //เอาไว้ใน Namespace
     class Restaurant
     {
         public string Name { get; set; }
@@ -23,9 +22,10 @@ namespace RestaurantApp_Team
     internal class Program
     {
         static List<Restaurant> restaurants = new List<Restaurant>();
-
         static void Main(string[] args)
         {
+
+
             while (true)
             {
                 Console.WriteLine("\n===== Restaurant Menu =====");
@@ -60,7 +60,22 @@ namespace RestaurantApp_Team
         // คน A รับผิดชอบ
         static void AddRestaurant()
         {
-            Console.WriteLine("Not completed");
+            
+
+            Console.Write("กรอกชื่อร้าน: ");
+            string name = Console.ReadLine();
+
+            Console.Write("กรอกประเภทอาหาร: ");
+            string type = Console.ReadLine();
+
+            Console.Write("กรอกคะแนน (เช่น 4.5): ");
+            
+            double rating = Convert.ToDouble(Console.ReadLine());
+
+            restaurants.Add(new Restaurant(name, type, rating));
+
+            Console.WriteLine("เพิ่มร้านเรียบร้อยแล้ว!");
+            
         }
 
         // คน B รับผิดชอบ
