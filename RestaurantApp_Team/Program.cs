@@ -12,16 +12,17 @@ namespace RestaurantApp_Team
         public string Name { get; set; }
         public string Type { get; set; }
         public double Rating { get; set; }
+        public Restaurant(string name, string type, double rating)
+        {
+            Name = name;
+            Type = type;
+            Rating = rating;
+        }
     }
 
     internal class Program
     {
-        static List<Restaurant> restaurants = new List<Restaurant>
-    {
-        new Restaurant { Name = "KFC", Type = "Fast Food", Rating = 4.2 },
-        new Restaurant { Name = "MK", Type = "Suki", Rating = 4.7 },
-        new Restaurant { Name = "Fuji", Type = "Japanese", Rating = 4.8 }
-    };
+        static List<Restaurant> restaurants = new List<Restaurant>();
 
         static void Main(string[] args)
         {
@@ -59,19 +60,84 @@ namespace RestaurantApp_Team
         // คน A รับผิดชอบ
         static void AddRestaurant()
         {
-            Console.WriteLine("Not completed");
+
+            Console.Write("กรอกชื่อร้าน: ");
+            string name = Console.ReadLine();
+
+            Console.Write("กรอกประเภทอาหาร: ");
+            string type = Console.ReadLine();
+
+            Console.Write("กรอกคะแนน (เช่น 4.5): ");
+
+            double rating = Convert.ToDouble(Console.ReadLine());
+
+            restaurants.Add(new Restaurant(name, type, rating));
+
+            Console.WriteLine("เพิ่มร้านเรียบร้อยแล้ว!");
+
         }
 
         // คน B รับผิดชอบ
         static void ShowGoodRating()
         {
-            Console.WriteLine("Not completed");
+            Console.WriteLine("\n===== Good Rating Restaurants =====");
+
+            var goodRestaurants = restaurants
+                .Where(r => r.Rating >= 4.5)
+                .ToList();
+
+            if (goodRestaurants.Count == 0)
+            {
+                Console.WriteLine("ไม่พบร้านที่มีคะแนนตั้งแต่ 4.5 ขึ้นไป");
+                return;
+            }
+
+            foreach (var r in goodRestaurants)
+            {
+                Console.WriteLine($"ชื่อร้าน: {r.Name}");
+                Console.WriteLine($"ประเภทอาหาร: {r.Type}");
+                Console.WriteLine($"คะแนน: {r.Rating}");
+                Console.WriteLine("--------------------");
+            }
         }
 
         // คน C รับผิดชอบ
         static void ShowSummary()
         {
-            Console.WriteLine("Not completed");
+            if (restaurants.Count == 0)
+            {
+                Console.WriteLine("ยังไม่มีข้อมูลร้านอาหาร");
+                return;
+            }
+
+            var sortedList = restaurants.OrderByDescending(x => x.Rating).ToList();
+
+            Console.WriteLine("=== รายชื่อร้านอาหารทั้งหมด (เรียงตามคะแนนสูงสุด-ต่ำสุด) ===");
+            int a = 1;
+            foreach (Restaurant item in sortedList)
+            {
+                Console.WriteLine($"{a}. {item.Name} Rate: {item.Rating}");
+                a++;
+            }
+
+            double maxRating = sortedList.Max(x => x.Rating);
+            double minRating = sortedList.Min(x => x.Rating);
+
+            Console.WriteLine("\n--- สรุป ---");
+
+            foreach (var r in sortedList.Where(x => x.Rating == maxRating))
+            {
+                Console.WriteLine($"ร้านที่มีคะแนนสูงสุด: {r.Name} Rate: {r.Rating}");
+            }
+
+            // ถ้าทุกร้านคะแนนเท่ากัน ไม่ต้องแสดงร้านต่ำสุดซ้ำ
+            if (minRating < maxRating)
+            {
+                foreach (var r in sortedList.Where(x => x.Rating == minRating))
+                {
+                    Console.WriteLine($"ร้านที่มีคะแนนต่ำสุด: {r.Name} Rate: {r.Rating}");
+                }
+            }
         }
     }
 
