@@ -12,16 +12,17 @@ namespace RestaurantApp_Team
         public string Name { get; set; }
         public string Type { get; set; }
         public double Rating { get; set; }
+        public Restaurant(string name, string type, double rating)
+        {
+            Name = name;
+            Type = type;
+            Rating = rating;
+        }
     }
 
     internal class Program
     {
-        static List<Restaurant> restaurants = new List<Restaurant>
-    {
-        new Restaurant { Name = "KFC", Type = "Fast Food", Rating = 4.2 },
-        new Restaurant { Name = "MK", Type = "Suki", Rating = 4.7 },
-        new Restaurant { Name = "Fuji", Type = "Japanese", Rating = 4.8 }
-    };
+        static List<Restaurant> restaurants = new List<Restaurant>();
 
         static void Main(string[] args)
         {
@@ -89,7 +90,14 @@ namespace RestaurantApp_Team
         // คน C รับผิดชอบ
         static void ShowSummary()
         {
-            Console.WriteLine("Not completed");
+            var sortedList = restaurants.OrderByDescending(x => x.Rating).ToList();
+            Console.WriteLine("=== รายชื่อร้านอาหารทั้งหมด (เรียงตามคะแนนสูงสุด-ต่ำสุด) ===");
+            int a = 1;
+            foreach(Restaurant item in restaurants)
+            {
+                Console.WriteLine($"{a}. ชื่อร้านที่มีคะแนนสูงสุด: {item.Name} Rate: {item.Rating} \n ชื่อร้านที่มีคะแนนต่ำสุด: {item.Name} Rate: {item.Rating}");
+                a++;
+            }
         }
     }
 
